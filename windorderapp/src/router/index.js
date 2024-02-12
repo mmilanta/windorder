@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import RecipeComponent from '../components/RecipeComponent.vue'; // This component will display the recipe
-import HomePage from '../components/HomePage.vue'; // This component will display the recipe
+import RecipePage from '../components/RecipePage.vue'; // This component will display the recipe
+import IndexPage from '../components/IndexPage.vue'; // This component will display the recipe
 
 const routes = [
   {
     path: '/recipe/:id',
     name: 'Recipe',
-    component: RecipeComponent,
+    component: RecipePage,
     props: true
   },
   {
     path: '/',
     name: 'Index',
-    component: HomePage,
+    component: IndexPage,
     props: true
   },
 ];
