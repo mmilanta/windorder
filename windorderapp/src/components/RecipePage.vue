@@ -10,10 +10,16 @@
         <h2>Note</h2>
         <p v-html="recipe_parsed.notes"/>
         <p class="card-text" v-html="viewableContent"/>
-        <button @click="editRecipe">Edit</button>
+        <button @click="isEditing = true">Edit</button>
       </div>
       <div v-else>
-        <textarea class="txt_box" v-model="editableContent"></textarea>
+        <textarea v-model="recipe.title"/>
+        <h2>Ingredienti</h2>
+        <textarea v-model="recipe.ingredients"/>
+        <h2>Ricetta</h2>
+        <textarea v-model="recipe.steps"/>
+        <h2>Note</h2>
+        <textarea v-model="recipe.notes"/>
         <button @click="saveChanges">Save</button>
         <button @click="discardChanges">Discard</button>
       </div>
