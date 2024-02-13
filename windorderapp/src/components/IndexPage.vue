@@ -44,11 +44,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.txt_box {
-display: flex;
-width: 95%;
-height: 90vh;
-}
-</style>

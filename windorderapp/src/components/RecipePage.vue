@@ -12,13 +12,13 @@
       <button @click="isEditing = true">Edit</button>
     </div>
     <div v-else>
-      <textarea v-model="recipe.title"/>
+      <textarea class="txt_box" v-model="recipe.title"/>
       <h2>Ingredienti</h2>
-      <textarea v-model="recipe.ingredients"/>
+      <textarea class="txt_box" v-model="recipe.ingredients"/>
       <h2>Ricetta</h2>
-      <textarea v-model="recipe.steps"/>
+      <textarea class="txt_box" v-model="recipe.steps"/>
       <h2>Note</h2>
-      <textarea v-model="recipe.notes"/>
+      <textarea class="txt_box" v-model="recipe.notes"/>
       <button @click="saveChanges">Save</button>
       <button @click="discardChanges">Discard</button>
     </div>
@@ -84,7 +84,7 @@ export default {
 <style>
 .txt_box {
 display: flex;
-width: 95%;
-height: 90vh;
+width: 100%;
+height: 20vh;
 }
-</style>
+</style> 
