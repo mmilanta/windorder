@@ -82,9 +82,9 @@ export default {
 }
 </script>
 <style>
-.txt_box {
+textarea {
 display: flex;
 width: 95%;
-height: 90vh;
+height: 20vh;
 }
 </style>
