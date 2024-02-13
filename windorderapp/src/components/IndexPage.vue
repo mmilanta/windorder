@@ -23,7 +23,9 @@ export default {
 
     recipes.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      this.recipes.push(doc.data());
+      var row = doc.data()
+      row.id = doc.id
+      this.recipes.push(row);
     });
 
     console.log(this.recipes)

@@ -27,7 +27,7 @@
 
 <script>
 import MarkdownIt from "markdown-it";
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from "../firebase/index"
 const markdown = new MarkdownIt();
@@ -47,37 +47,25 @@ export default {
   },
   methods: {
     async fetchRecipe() {
-      const recipesCollectionRef = collection(db, 'recipes');
-    const q = query(recipesCollectionRef, where('id', '==', parseInt(this.id)));
+      const docRef = doc(db, "recipes", this.id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        this.recipe = docSnap.data();
+      } 
 
-    try {
-      // Execute the query
-      const querySnapshot = await getDocs(q);
-
-      // Check if we got any documents
-      if (querySnapshot.empty) {
-        console.log('No matching documents.');
-        return;
-      }
-      // Iterate through the documents
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        this.recipe = doc.data()
-        console.log(doc.id, ' => ', this.recipe);
-        // Process the data as needed
-      });
+      console.log(this.id, ' => ', this.recipe);
       this.recipe_parsed = {
         title: this.recipe.title,
         ingredients: markdown.render(this.recipe.ingredients),
         steps: markdown.render(this.recipe.steps),
         notes: markdown.render(this.recipe.notes),
       }
-    } catch (error) {
-      console.error('Error getting documents: ', error);
-    }
     },
-    saveChanges() {
-      
+    async saveChanges() {
+      const docRef = doc(db, "recipes", this.id);
+      await updateDoc(docRef, this.recipe);
+
       console.log("About to edit:")
       console.log(this.recipe)
       this.isEditing = false;
