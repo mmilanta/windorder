@@ -1,11 +1,16 @@
+<script setup>
+import LoginComponent from "./LoginComponent.vue";
+</script>
 <template>
   <div>
+    <LoginComponent/>
+    <h1>Le Ricette di Nonna Aua</h1>
     <ul>
     <li v-for="(recipes_of_kind, category) in recipes" :key="category">
-      <h1 v-html="category.split('_').join(' ')"/>
+      <h2 v-html="category.split('_').join(' ')"/>
       <ul>
       <li v-for="recipe in recipes_of_kind" :key="recipe.id">
-        <a :href="href" @click="this.$router.push('/recipe/' + recipe.id);">{{ recipe.title }}</a>
+        <a @click="this.$router.push('/recipe/' + recipe.id);">{{ recipe.title }}</a>
       </li>
       </ul>
     </li>
@@ -14,12 +19,13 @@
 </template>
 <script>
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase/index"
-
+import { db } from "../firebase/index";
 export default {
   data() {
     return {
-      recipes: {}
+      recipes: {},
+      logged_in: false,
+      user_name: ''
     }
   },
   async created() {
@@ -40,7 +46,7 @@ export default {
     for (const key of Object.keys(this.recipes)) {
       this.recipes[key].sort((a, b) => a.title.localeCompare(b.title))
     }
-    console.log(this.recipes)
+
   },
 };
 </script>

@@ -1,5 +1,9 @@
+<script setup>
+import LoginComponent from "./LoginComponent.vue";
+</script>
 <template>
   <div>
+    <LoginComponent/>
     <div v-if="!isEditing">
       <h1 v-html="recipe_parsed.title"/>
       <h2>Ingredienti</h2>
