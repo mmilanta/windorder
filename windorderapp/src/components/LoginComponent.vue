@@ -7,7 +7,9 @@
 </template>
 
 <script>
-import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/index";
+
 
 export default {
   data() {
@@ -17,7 +19,6 @@ export default {
     }
   },
   async created() {
-    const auth = getAuth()
     onAuthStateChanged(auth, (user) => {
       if (user){
         this.logged_in = true;
@@ -31,13 +32,12 @@ export default {
   methods: {
     login() {
       const provider = new GoogleAuthProvider();
-      signInWithPopup(getAuth(), provider)
+      signInWithPopup(auth, provider)
         .then((result) => {
         console.log(result);
       })
     },
     logout() {
-      const auth = getAuth()
       signOut(auth)
     },
   }
