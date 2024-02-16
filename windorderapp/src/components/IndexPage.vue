@@ -10,7 +10,7 @@ import LoginComponent from "./LoginComponent.vue";
       <h2 v-html="category.split('_').join(' ')"/>
       <ul>
       <li v-for="recipe in recipes_of_kind" :key="recipe.id">
-        <a @click="this.$router.push('/recipe/' + recipe.id);">{{ recipe.title }}</a>
+        <a @click="navigate_to_recipe_page(recipe.id);">{{ recipe.title }}</a>
       </li>
       </ul>
     </li>
@@ -18,6 +18,8 @@ import LoginComponent from "./LoginComponent.vue";
   </div>
 </template>
 <script>
+
+import router from "@/router";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/index";
 export default {
@@ -46,7 +48,11 @@ export default {
     for (const key of Object.keys(this.recipes)) {
       this.recipes[key].sort((a, b) => a.title.localeCompare(b.title))
     }
-
   },
+  methods: {
+    navigate_to_recipe_page(recipe_id){
+      router.push('/recipe/' + recipe_id)
+    }
+  }
 };
 </script>
