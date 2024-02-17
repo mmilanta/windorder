@@ -15,7 +15,10 @@ import { NButton, NSpace } from 'naive-ui';
       <h2>Note</h2>
       <p v-html="recipe_parsed.notes"/>
       <p class="card-text" v-html="viewableContent"/>
-      <NButton @click="isEditing = true">Edit</NButton>
+      <NSpace>
+      <NButton type="warning" @click="isEditing = true">Edit</NButton>
+      <NButton type="error" @click="deleteRecipe">Delete</NButton>
+    </NSpace>
     </div>
     <div v-else>
       <EditRecipeForm v-if="recipe" @SaveRecipe="saveChanges" @DiscardRecipe="discardChanges" :recipe="recipe"/>
@@ -24,8 +27,9 @@ import { NButton, NSpace } from 'naive-ui';
 </template>
 
 <script>
+import router from "@/router";
 import MarkdownIt from "markdown-it";
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 import { db } from "../firebase/index"
 const markdown = new MarkdownIt();
@@ -76,6 +80,11 @@ export default {
     },
     editRecipe() {
       this.isEditing = true;
+    },
+    async deleteRecipe() {
+      const docRef = doc(db, "recipes", this.id);
+      await deleteDoc(docRef);
+      router.push('/')
     },
   }
 }
