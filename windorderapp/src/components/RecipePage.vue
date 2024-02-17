@@ -18,7 +18,7 @@ import { NButton, NSpace } from 'naive-ui';
       <NButton @click="isEditing = true">Edit</NButton>
     </div>
     <div v-else>
-      <EditRecipeForm v-if="recipe" :recipe="recipe"/>
+      <EditRecipeForm v-if="recipe" @SaveRecipe="saveChanges" @DiscardRecipe="discardChanges" :recipe="recipe"/>
     </div>
   </n-space>
 </template>
@@ -57,8 +57,6 @@ export default {
         console.log("Document data:", docSnap.data());
         this.recipe = docSnap.data();
       } 
-
-      console.log(this.id, ' => ', this.recipe);
       this.recipe_parsed = {
         title: this.recipe.title,
         ingredients: markdown.render(this.recipe.ingredients),
@@ -66,12 +64,9 @@ export default {
         notes: markdown.render(this.recipe.notes),
       }
     },
-    async saveChanges() {
+    async saveChanges(edited_recipe) {
       const docRef = doc(db, "recipes", this.id);
-      await updateDoc(docRef, this.recipe);
-
-      console.log("About to edit:")
-      console.log(this.recipe)
+      await updateDoc(docRef, edited_recipe);
       this.isEditing = false;
       this.fetchRecipe(); // Reset changes
     },
