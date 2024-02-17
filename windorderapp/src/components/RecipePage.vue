@@ -1,8 +1,10 @@
 <script setup>
 import LoginComponent from "./LoginComponent.vue";
+import EditRecipeForm from "./EditRecipeForm.vue";
+import { NButton, NSpace } from 'naive-ui';
 </script>
 <template>
-  <div>
+  <n-space vertical style="padding: 10px 20px 10px 20px">
     <LoginComponent/>
     <div v-if="!isEditing">
       <h1 v-html="recipe_parsed.title"/>
@@ -13,20 +15,12 @@ import LoginComponent from "./LoginComponent.vue";
       <h2>Note</h2>
       <p v-html="recipe_parsed.notes"/>
       <p class="card-text" v-html="viewableContent"/>
-      <button @click="isEditing = true">Edit</button>
+      <NButton @click="isEditing = true">Edit</NButton>
     </div>
     <div v-else>
-      <textarea class="txt_box" v-model="recipe.title"/>
-      <h2>Ingredienti</h2>
-      <textarea class="txt_box" v-model="recipe.ingredients"/>
-      <h2>Ricetta</h2>
-      <textarea class="txt_box" v-model="recipe.steps"/>
-      <h2>Note</h2>
-      <textarea class="txt_box" v-model="recipe.notes"/>
-      <button @click="saveChanges">Save</button>
-      <button @click="discardChanges">Discard</button>
+      <EditRecipeForm v-if="recipe" :recipe="recipe"/>
     </div>
-  </div>
+  </n-space>
 </template>
 
 <script>
@@ -42,7 +36,13 @@ export default {
   data() {
     return {
       isEditing: false,
-      recipe: '',
+      recipe: {
+        title: "test",
+        category: "test",
+        ingredients: "test",
+        steps: "test",
+        notes: "test"
+      },
       recipe_parsed: ''
     }
   },
