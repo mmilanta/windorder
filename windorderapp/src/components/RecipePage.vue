@@ -4,26 +4,25 @@ import EditRecipeForm from "./EditRecipeForm.vue";
 import { NButton, NSpace } from 'naive-ui';
 </script>
 <template>
-  <n-space vertical style="padding: 10px 20px 10px 20px">
-    <LoginComponent/>
-    <div v-if="!isEditing">
-      <h1 v-html="recipe_parsed.title"/>
-      <h2>Ingredienti</h2>
-      <p v-html="recipe_parsed.ingredients"/>
-      <h2>Ricetta</h2>
-      <p v-html="recipe_parsed.steps"/>
-      <h2>Note</h2>
-      <p v-html="recipe_parsed.notes"/>
-      <p class="card-text" v-html="viewableContent"/>
+  <div class="bg-orange-50 min-h-screen">
+    <div v-if="!isEditing" class="container flex flex-col px-5 mx-auto xs:space-y-10 md:space-y-5 space-y-3">
+      <p v-html="recipe_parsed.title" class="xl:text-8xl mb-10 lg:text-7xl md:text-6xl sm:text-5xl text-4xl mt-10 font-serif"></p>
+      <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Ingredienti</p>
+      <p class="font-serif text-lg" v-html="recipe_parsed.ingredients"/>
+      <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Ricetta</p>
+      <p class="font-serif text-lg" v-html="recipe_parsed.steps"/>
+      <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl" v-if="recipe_parsed.notes">Note</p>
+      <p class="font-serif text-lg" v-html="recipe_parsed.notes"/>      
       <NSpace>
       <NButton type="warning" @click="isEditing = true">Edit</NButton>
       <NButton type="error" @click="deleteRecipe">Delete</NButton>
+      <LoginComponent></LoginComponent>
     </NSpace>
     </div>
     <div v-else>
       <EditRecipeForm v-if="recipe" @SaveRecipe="saveChanges" @DiscardRecipe="discardChanges" :recipe="recipe"/>
     </div>
-  </n-space>
+  </div>
 </template>
 
 <script>
@@ -90,9 +89,10 @@ export default {
 }
 </script>
 <style>
-.txt_box {
-display: flex;
-width: 100%;
-height: 20vh;
+
+li {
+    display: list-item;
+    list-style-type: square;
+    list-style-position: inside;
 }
 </style> 

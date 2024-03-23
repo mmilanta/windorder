@@ -1,25 +1,21 @@
 <script setup>
-import LoginComponent from "./LoginComponent.vue";
-import { NList, NListItem, NSpace, NButton } from 'naive-ui';
 </script>
 <template>
-  <n-space vertical style="padding: 10px 20px 10px 20px">
-    <h1>Le Ricette di Nonna Aua</h1>
-    <div v-for="(recipes_of_kind, category) in recipes" :key="category">
-      <h2 v-html="category.split('_').join(' ')" style="text-transform: capitalize"/>
-      <NList hoverable clickable>
-        <div v-for="recipe in recipes_of_kind" :key="recipe.id">
-          <NListItem @click="navigate_to_recipe_page(recipe.id);" style="height: 14px">
-            {{ recipe.title }}
-          </NListItem>
+  <div class="bg-orange-50">
+    <div class="container flex flex-col px-5 mx-auto xs:space-y-10 md:space-y-5 space-y-3">
+      <p class="xl:text-8xl mb-10 lg:text-7xl md:text-6xl sm:text-5xl text-4xl mt-10 font-serif">Le Ricette di Nonna Aua</p>
+      <div v-for="(recipes_of_kind, category) in recipes" :key="category" class="container flex flex-col px-5 mx-auto space-y-0">
+        <div class="container  xl:space-y-5 md:space-y-2 space-y-1">
+          <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl" style="text-transform: capitalize" v-html="category.split('_').join(' ')"></p>
+          <div class="container px-5 xl:space-y-2 md:space-y-1 ">
+            <div v-for="recipe in recipes_of_kind" :key="recipe.id">
+              <p @click="navigate_to_recipe_page(recipe.id);" class="font-serif text-md hover:underline sm:text-lg md:text-xl lg:text-2xl">{{ recipe.title }}</p>
+            </div>
+          </div>
         </div>
-      </NList>
+      </div>
     </div>
-    <NButton @click="create_recipe">
-      Nuova Ricetta
-    </NButton>
-    <LoginComponent/>
-  </n-space>
+  </div>
 </template>
 <script>
 
