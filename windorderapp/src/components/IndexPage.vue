@@ -1,7 +1,7 @@
 <script setup>
 </script>
 <template>
-  <div class="bg-orange-50">
+  <div class="bg-orange-50 min-h-screen">
     <div class="container flex flex-col px-5 mx-auto xs:space-y-10 md:space-y-5 space-y-3">
       <p class="xl:text-8xl mb-10 lg:text-7xl md:text-6xl sm:text-5xl text-4xl mt-10 font-serif">Le Ricette di Nonna Aua</p>
       <div v-for="(recipes_of_kind, category) in recipes" :key="category" class="container flex flex-col px-5 mx-auto space-y-0">
@@ -14,6 +14,7 @@
           </div>
         </div>
       </div>
+      <div class="h-5"></div>
     </div>
   </div>
 </template>

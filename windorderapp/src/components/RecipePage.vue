@@ -1,7 +1,7 @@
 <script setup>
 import LoginComponent from "./LoginComponent.vue";
 import EditRecipeForm from "./EditRecipeForm.vue";
-import { NButton, NSpace } from 'naive-ui';
+import { NSpace } from 'naive-ui';
 </script>
 <template>
   <div class="bg-orange-50 min-h-screen">
@@ -14,14 +14,19 @@ import { NButton, NSpace } from 'naive-ui';
       <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl" v-if="recipe_parsed.notes">Note</p>
       <p class="font-serif text-lg" v-html="recipe_parsed.notes"/>      
       <NSpace>
-      <NButton type="warning" @click="isEditing = true">Edit</NButton>
-      <NButton type="error" @click="deleteRecipe">Delete</NButton>
+        <button class="bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded"  type="error" @click="isEditing = true" color="#63e2b7">
+        Edit
+      </button>      
+      <button class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"  type="error" @click="deleteRecipe" color="#63e2b7">
+        Delete
+      </button>
       <LoginComponent></LoginComponent>
     </NSpace>
     </div>
     <div v-else>
       <EditRecipeForm v-if="recipe" @SaveRecipe="saveChanges" @DiscardRecipe="discardChanges" :recipe="recipe"/>
     </div>
+    <div class="h-5"></div>
   </div>
 </template>
 

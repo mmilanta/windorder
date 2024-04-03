@@ -1,12 +1,11 @@
 <script setup>
-import { NButton, NP, NSpace } from 'naive-ui';
 </script>
 <template>
-    <NSpace>
-      <NP v-if="logged_in">Logged in as {{ user_name }}</NP>
-      <NButton v-if="logged_in" @click="logout">Logout</NButton>
-      <NButton v-else @click="login">Login</NButton>
-    </NSpace>
+  <div>
+      <p v-if="logged_in" class="align-middle">Logged in as {{ user_name }}</p>
+      <button v-if="logged_in" class="align-middle" @click="logout">Logout</button>
+      <button v-else @click="login" class="align-middle">Login</button>
+    </div>
 </template>
 
 <script>

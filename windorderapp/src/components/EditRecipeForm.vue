@@ -1,5 +1,5 @@
 <script setup>
-import { NButton, NInput, NSelect, NSpace, NThing } from 'naive-ui';
+import { NInput, NSelect, NSpace } from 'naive-ui';
 import { defineProps, ref } from 'vue'
 const props = defineProps(['recipe']);
 console.log("props")
@@ -49,26 +49,34 @@ const selectOptions = [
     label: 'Antipasti',
     value: 'antipasti'
   }
-]
+];
+const themeOverrides = {
+    common: {
+      primaryColor: '#FFEDD5',
+      primaryColorHover: "#FFEDD5",
+      primaryColorPressed: "#FFEDD5",
+      textColorBase: "#FFEDD5"
+    }
+  };
 </script>
 
 <template>
     <n-space vertical style="padding: 10px 20px 10px 20px">
-          <n-input style="font-size: 30px" v-model:value="edited_recipe.title" placeholder="Basic Input" />
-          <n-select v-model:value="edited_recipe.category" :options="selectOptions"/>
-          <n-thing title="Ingredienti"/>
-          <n-input v-model:value="edited_recipe.ingredients" type="textarea" placeholder="Ingredienti" :autosize="{minRows: 3}"/>
-          <n-thing title="Ricetta"/>
-          <n-input v-model:value="edited_recipe.steps" type="textarea" placeholder="Ricetta" :autosize="{minRows: 3}"/>
-          <n-thing title="Note"/>
-          <n-input v-model:value="edited_recipe.notes" type="textarea" placeholder="Note" :autosize="{minRows: 3}"/>
+          <n-input class="xl:text-8xl lg:text-7xl md:text-6xl sm:text-5xl text-4xl font-serif bg-inherit focus:bg-inherit" v-model:value="edited_recipe.title" placeholder="Basic Input" type="textarea" :autosize="{minRows: 1}" :theme-overrides="themeOverrides"/>
+          <n-select class="font-serif text-lg bg-inherit focus:bg-inherit" v-model:value="edited_recipe.category" :options="selectOptions" :theme-overrides="themeOverrides"/>
+          <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Ingredienti</p>
+          <n-input class="font-serif text-lg bg-inherit focus:bg-inherit" v-model:value="edited_recipe.ingredients" type="textarea" placeholder="Ingredienti" :autosize="{minRows: 3}" :theme-overrides="themeOverrides"/>
+          <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Ricetta</p>
+          <n-input class="font-serif text-lg bg-inherit focus:bg-inherit" v-model:value="edited_recipe.steps" type="textarea" placeholder="Ricetta" :autosize="{minRows: 3}" :theme-overrides="themeOverrides"/>
+          <p class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Note</p>
+          <n-input class="font-serif text-lg bg-inherit focus:bg-inherit" v-model:value="edited_recipe.notes" type="textarea" placeholder="Note" :autosize="{minRows: 3}" :theme-overrides="themeOverrides"/>
         <n-space>
-          <n-button type="primary" @click="$emit('SaveRecipe', edited_recipe)">
+          <button class="bg-emerald-500 hover:bg-emerald-700 text-white py-2 px-4 rounded" @click="$emit('SaveRecipe', edited_recipe)">
           Save
-        </n-button>
-        <n-button type="error" @click="$emit('DiscardRecipe')">
+        </button>
+        <button class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"  type="error" @click="$emit('DiscardRecipe')" color="#63e2b7">
           Discard
-        </n-button>
+        </button>
         </n-space>
       </n-space>
   </template>
