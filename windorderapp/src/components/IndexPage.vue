@@ -1,4 +1,5 @@
 <script setup>
+import LoginComponent from "./LoginComponent.vue";
 </script>
 <template>
   <div class="bg-orange-50 min-h-screen">
@@ -13,6 +14,13 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="h-5"></div>
+      <div class="flex flex-row">
+        <button class="bg-emerald-500 hover:bg-emerald-700 text-white py-2 px-4 mx-4 rounded w-fit" @click="create_recipe">
+          New Recipe
+        </button>
+        <LoginComponent></LoginComponent>
       </div>
       <div class="h-5"></div>
     </div>
