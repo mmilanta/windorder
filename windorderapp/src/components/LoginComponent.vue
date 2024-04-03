@@ -1,10 +1,10 @@
 <script setup>
 </script>
 <template>
-  <div>
-      <p v-if="logged_in">Logged in as {{ user_name }}</p>
-      <button v-if="logged_in" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-fit" @click="logout">Logout</button>
-      <button v-else @click="login" class="bg-emerald-500 hover:bg-emerald-700 text-white py-2 px-4 rounded w-fit">Login</button>
+  <div class="flex flex-row">
+    <button v-if="logged_in" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-fit" @click="logout">Logout</button>
+    <button v-else @click="login" class="bg-emerald-500 hover:bg-emerald-700 text-white py-2 px-4 rounded w-fit">Login</button>
+    <p v-if="logged_in">Logged in as {{ user_name }}</p>
   </div>
 </template>
 
