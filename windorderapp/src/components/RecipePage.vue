@@ -85,9 +85,11 @@ export default {
       this.isEditing = true;
     },
     async deleteRecipe() {
-      const docRef = doc(db, "recipes", this.id);
-      await deleteDoc(docRef);
-      router.push('/')
+      if(confirm("Do you really want to delete this recipe? There is no coming back")){
+        const docRef = doc(db, "recipes", this.id);
+        await deleteDoc(docRef);
+        router.push('/')
+      }
     },
   }
 }
